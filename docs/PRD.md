@@ -170,7 +170,7 @@ Name clashes in the same second get ` (2)`, ` (3)` and so on. Characters Windows
 | Memory, idle | under 30 MB |
 | CPU, idle | 0% |
 | App startup | under 0.5 s |
-| Exe / installer size | under 300 KB / under 2 MB |
+| Exe / installer size | under 300 KB / under 2 MB. v1.0 accepted at 88 KB / 2076 KB, because most of the installer is Inno Setup itself |
 
 ## Release, testing and risks
 
