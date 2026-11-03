@@ -1,9 +1,12 @@
 ; SnipKeep installer (Inno Setup 6)
 ; Per-user install to %LOCALAPPDATA%\Programs\SnipKeep. No admin rights needed.
-; Build: iscc /DAppVersion=1.0.0 /DSourceDir=..\out\app installer\SnipKeep.iss
+; Build: iscc /DAppVersion=1.0.0 /DAppNumericVersion=1.0.0 /DSourceDir=..\out\app installer\SnipKeep.iss
 
 #ifndef AppVersion
   #define AppVersion "0.0.0"
+#endif
+#ifndef AppNumericVersion
+  #define AppNumericVersion "0.0.0"
 #endif
 #ifndef SourceDir
   #define SourceDir "..\out\app"
@@ -22,7 +25,7 @@ AppPublisher=Asher Wertheim
 AppPublisherURL={#AppUrl}
 AppSupportURL={#AppUrl}/issues
 AppUpdatesURL={#AppUrl}/releases
-VersionInfoVersion={#AppVersion}
+VersionInfoVersion={#AppNumericVersion}
 VersionInfoDescription={#AppName} Setup
 
 PrivilegesRequired=lowest
