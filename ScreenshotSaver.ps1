@@ -72,9 +72,13 @@ $timer.Add_Tick({
                 $path = Join-Path $script:folder "$base.png"
                 $i = 2
                 while (Test-Path $path) { $path = Join-Path $script:folder "$base ($i).png"; $i++ }
-                $img.Save($path, [System.Drawing.Imaging.ImageFormat]::Png)
+                try {
+                    $img.Save($path, [System.Drawing.Imaging.ImageFormat]::Png)
+                } catch {
+                    # only notify when saving fails (Windows already confirms the snip)
+                    $tray.ShowBalloonTip(3000, 'Screenshot NOT saved', "Could not write to $($script:folder)", 'Error')
+                }
                 $img.Dispose()
-                $tray.ShowBalloonTip(1500, 'Screenshot saved', (Split-Path $path -Leaf), 'None')
             }
         }
         $script:seq = $s
