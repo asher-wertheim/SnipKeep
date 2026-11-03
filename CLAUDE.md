@@ -9,8 +9,7 @@ Full product spec: `docs/PRD.md`. Follow it. If a change goes against the PRD, s
 
 ## Current state (Nov 3, 2026)
 - The v0 PowerShell version is in `legacy/`.
-- v1 is built: app in `src/SnipKeep`, tests in `tests/SnipKeep.Tests`, installer in `installer/`, CI in `.github/workflows/build.yml`. Waiting for Asher to run the PRD test checklist on Windows 10.
-- README still needs the demo GIF (`docs/demo.gif`).
+- v1 is built: app in `src/SnipKeep`, tests in `tests/SnipKeep.Tests`, installer in `installer/`, CI in `.github/workflows/build.yml`. All PRD checks passed on Windows 10. Next: publish the v1.0.0 release, then v2 (draft spec in `docs/PRD.md` on branch `claude/snipkeep-v2-prd`).
 
 ## Plan for v1
 1. Move the v0 files to `legacy/`.
