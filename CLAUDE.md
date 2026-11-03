@@ -8,8 +8,9 @@ SnipKeep: a small Windows app that auto-saves Win+Shift+S screenshots to a folde
 Full product spec: `docs/PRD.md`. Follow it. If a change goes against the PRD, say so and update the PRD in the same change.
 
 ## Current state (Nov 3, 2026)
-- The repo root still holds the v0 PowerShell version (`ScreenshotSaver.ps1`, `.vbs`, `Install.cmd`, `icon.ico`). It works on Windows 10 and is in daily use.
-- v1 (C# app + installer) is specced and approved in `docs/PRD.md`. Not started. Decisions are at the end of the PRD.
+- The v0 PowerShell version is in `legacy/`.
+- v1 is built: app in `src/SnipKeep`, tests in `tests/SnipKeep.Tests`, installer in `installer/`, CI in `.github/workflows/build.yml`. Waiting for Asher to run the PRD test checklist on Windows 10.
+- README still needs the demo GIF (`docs/demo.gif`).
 
 ## Plan for v1
 1. Move the v0 files to `legacy/`.

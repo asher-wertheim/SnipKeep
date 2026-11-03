@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net48</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <LangVersion>7.3</LangVersion>
+    <RootNamespace>SnipKeep</RootNamespace>
+    <AssemblyName>SnipKeep</AssemblyName>
+    <ApplicationIcon>SnipKeep.ico</ApplicationIcon>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <Version>1.0.0</Version>
+    <Product>SnipKeep</Product>
+    <AssemblyTitle>SnipKeep</AssemblyTitle>
+    <Description>SnipKeep</Description>
+    <Company>Asher Wertheim</Company>
+    <Copyright>Copyright (c) 2026 Asher Wertheim. All rights reserved.</Copyright>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <DebugType>none</DebugType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="SnipKeep.ico" LogicalName="SnipKeep.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System.Runtime.Serialization" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="SnipKeep.Tests" />
+  </ItemGroup>
+
+</Project>

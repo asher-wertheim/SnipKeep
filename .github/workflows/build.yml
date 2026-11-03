@@ -1,0 +1,110 @@
+name: Build
+
+on:
+  push:
+    branches: ["**"]
+    tags: ["v*"]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Pick version
+        id: version
+        run: |
+          [xml]$proj = Get-Content src/SnipKeep/SnipKeep.csproj
+          $base = $proj.Project.PropertyGroup.Version | Where-Object { $_ } | Select-Object -First 1
+          if ($env:GITHUB_REF_TYPE -eq 'tag') {
+            $display = $env:GITHUB_REF_NAME.TrimStart('v')
+            $base = ($display -split '-')[0]
+          } else {
+            $display = "$base-ci.$env:GITHUB_RUN_NUMBER"
+          }
+          "display=$display" >> $env:GITHUB_OUTPUT
+          "numeric=$base" >> $env:GITHUB_OUTPUT
+          Write-Host "Version $display ($base)"
+
+      - name: Test
+        run: dotnet test tests/SnipKeep.Tests -c Release
+
+      - name: Build app
+        run: >
+          dotnet build src/SnipKeep -c Release -o out/app
+          -p:Version=${{ steps.version.outputs.display }}
+          -p:FileVersion=${{ steps.version.outputs.numeric }}
+
+      - name: Install Inno Setup
+        run: |
+          if (-not (Test-Path "${env:ProgramFiles(x86)}\Inno Setup 6\ISCC.exe")) {
+            choco install innosetup -y --no-progress
+          }
+
+      - name: Build installer
+        run: >
+          & "${env:ProgramFiles(x86)}\Inno Setup 6\ISCC.exe"
+          /DAppVersion=${{ steps.version.outputs.display }}
+          /DAppNumericVersion=${{ steps.version.outputs.numeric }}
+          /DSourceDir=..\out\app
+          installer\SnipKeep.iss
+
+      - name: Build portable zip
+        run: |
+          $files = 'out/app/SnipKeep.exe', 'out/app/SnipKeep.exe.config', 'LICENSE'
+          Compress-Archive -Path $files -DestinationPath out/SnipKeep-portable.zip -Force
+
+      - name: Check sizes
+        run: |
+          $exe = (Get-Item out/app/SnipKeep.exe).Length
+          $setup = (Get-Item out/SnipKeep-Setup.exe).Length
+          $summary = @(
+            "| File | Size | Budget |",
+            "| --- | --- | --- |",
+            "| SnipKeep.exe | $([math]::Round($exe / 1KB)) KB | 300 KB |",
+            "| SnipKeep-Setup.exe | $([math]::Round($setup / 1KB)) KB | 2048 KB |"
+          )
+          $summary | Out-File $env:GITHUB_STEP_SUMMARY -Append
+          $summary | Write-Host
+          if ($exe -gt 300KB) { Write-Error "SnipKeep.exe is over the 300 KB budget" }
+          # Most of the installer is the Inno Setup program itself, so this is a warning, not a failure.
+          if ($setup -gt 2MB) { Write-Host "::warning::SnipKeep-Setup.exe is over the 2 MB budget" }
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: SnipKeep-${{ steps.version.outputs.display }}
+          path: |
+            out/SnipKeep-Setup.exe
+            out/SnipKeep-portable.zip
+          if-no-files-found: error
+
+  release:
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: dist
+          merge-multiple: true
+
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            dist/SnipKeep-Setup.exe
+            dist/SnipKeep-portable.zip
+          generate_release_notes: true

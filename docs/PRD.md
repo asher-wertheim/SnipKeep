@@ -59,7 +59,7 @@ v1 does one job well: catch the snip, save it, stay out of the way.
 | Duplicate guard | Skips an image identical to the last one saved |
 | Settings window | Folder, file name pattern, start with Windows, screenshots only, pause |
 | Open from Start menu | Launching SnipKeep while it runs opens the settings window |
-| Pause / resume | One button in settings. Optional auto-resume after 15 min, 1 h or until restart |
+| Pause / resume | One button in settings. Optional auto-resume after 15 min, 1 h or until restart, or stay paused until resumed |
 | Start with Windows | On by default. Shows as "SnipKeep" in Task Manager > Startup |
 | Error alerts only | Branded "SnipKeep" toast when a save fails, nothing on success |
 | Installer | Per-user, no admin, Start menu entry, uninstall from Settings > Apps |
@@ -137,9 +137,9 @@ SnipKeep is a C# WinForms app on .NET Framework 4.8, which ships inside Windows 
 | Settings | `%APPDATA%\SnipKeep\settings.json` | Easy to read, back up and delete |
 | Start with Windows | `HKCU\...\CurrentVersion\Run` value "SnipKeep" | Shows as SnipKeep in Task Manager. No admin |
 | Alerts | Short-lived notification icon, errors only | Toast header shows "SnipKeep" with our icon. Nothing stays in the tray |
-| Installer | Inno Setup, per-user, `%LOCALAPPDATA%\Programs\SnipKeep` | No admin prompt. Registers in Settings > Apps |
+| Installer | Inno Setup, per-user, `%LOCALAPPDATA%\Programs\SnipKeep` | No admin prompt. Registers in Settings > Apps. Asks a running copy to quit (`--quit`) before update and uninstall |
 | Build and release | GitHub Actions on `windows-latest`, triggered by a version tag | Every release is built the same way, from source |
-| License | MIT | Standard for portfolio open source |
+| License | All rights reserved, with an "as is" no-warranty clause | Keeps every option open, including selling later. Can move to open source later |
 
 ![SnipKeep architecture](architecture.png)
 
@@ -147,7 +147,7 @@ The top row runs on every clipboard change. The bottom row runs only when the us
 
 **Screenshots-only rule**
 
-A clipboard update counts as a screenshot when it holds a bitmap and none of these formats: `HTML Format`, `FileDrop`, `Rich Text Format`, or Office drawing formats. Browsers and Office add those when you copy an image. Snip & Sketch does not. This rule must be checked on real Windows 10 and 11 machines before release.
+A clipboard update counts as a screenshot when it holds a bitmap and none of these formats: `HTML Format`, `FileDrop`, `Rich Text Format`, or Office drawing formats. Content marked `ExcludeClipboardContentFromMonitorProcessing` (used by password managers) is never saved, even with the setting off. Browsers and Office add those when you copy an image. Snip & Sketch does not. This rule must be checked on real Windows 10 and 11 machines before release.
 
 **Settings file**
 
@@ -158,6 +158,7 @@ A clipboard update counts as a screenshot when it holds a bitmap and none of the
 | `screenshotsOnly` | true |
 | `startWithWindows` | true |
 | `paused` / `pausedUntil` | false / empty |
+| `firstSaveShown` | false. Set after the one-time "First screenshot saved" toast |
 
 Name clashes in the same second get ` (2)`, ` (3)` and so on. Characters Windows does not allow are removed from the pattern.
 
@@ -200,8 +201,8 @@ v1.0 ships as a GitHub Release with two files: `SnipKeep-Setup.exe` and `SnipKee
 
 | Risk | Impact | Plan |
 | --- | --- | --- |
-| Unsigned exe shows "Windows protected your PC" | Users may not trust it | README explains "More info > Run anyway". Apply to SignPath free signing for open source later |
-| Antivirus flags an unknown app that reads the clipboard | Install blocked | Open source code, built by GitHub Actions. Submit to Microsoft for review if flagged |
+| Unsigned exe shows "Windows protected your PC" | Users may not trust it | README explains "More info > Run anyway". Consider paid code signing later (free SignPath signing needs an open source license) |
+| Antivirus flags an unknown app that reads the clipboard | Install blocked | Public source code, built by GitHub Actions. Submit to Microsoft for review if flagged |
 | Screenshots-only rule misses or blocks some images | Wrong files saved or skipped | Test on Windows 10 and 11. Setting can be turned off |
 | Windows 11 Snipping Tool already auto-saves | Less need on 11 | Position as Windows 10 first. On 11 it still adds folder choice and naming |
 | Claude cannot run Windows builds directly | Bugs found late | Build in GitHub Actions. Asher tests each build |
@@ -210,4 +211,5 @@ v1.0 ships as a GitHub Release with two files: `SnipKeep-Setup.exe` and `SnipKee
 
 - Name: SnipKeep. The only exact match found is a small, inactive code-snippet repo. A paid macOS app called SnapKeep exists, so always say "for Windows" in the README and store text.
 - Repo renamed from `pc-screenshot-saver` to `snipkeep`.
+- License: all rights reserved, with an "as is" no-warranty clause. Replaces MIT so a paid version stays possible.
 - Default folder: `Pictures\Screenshots`, plus a one-time toast on the first save. Desktop was rejected because OneDrive often syncs it and it fills up fast.
