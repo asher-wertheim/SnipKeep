@@ -213,3 +213,128 @@ v1.0 ships as a GitHub Release with two files: `SnipKeep-Setup.exe` and `SnipKee
 - Repo renamed from `pc-screenshot-saver` to `snipkeep`.
 - License: all rights reserved, with an "as is" no-warranty clause. Replaces MIT so a paid version stays possible.
 - Default folder: `Pictures\Screenshots`, plus a one-time toast on the first save. Desktop was rejected because OneDrive often syncs it and it fills up fast.
+
+---
+
+# SnipKeep v2: draft spec
+
+Nov 3, 2026 · Asher Wertheim · Status: draft, decisions from the v2 Q&A. Mockups come before any code.
+
+## Why v2
+
+v1 works but looks bare-bones. v2 keeps the same job (catch the snip, save it, stay out of the way) and makes the whole experience friendly, modern, fast and fun. UX is the top priority.
+
+## Audience and release
+
+- For both a portfolio and real public users.
+- v1.0 is released first. v2 work starts after that.
+- English only.
+- Windows 10 and 11. Windows 10 support is required.
+
+## Look and feel
+
+| Item | Decision |
+| --- | --- |
+| UI technology | WPF on .NET Framework 4.8. Built into Windows 10 and 11, nothing to download. May move to a newer stack later if it stays Windows 10 compatible |
+| Style references | Duolingo, Focus Friend, Bluey's Quest for the Gold Pen: bright, warm, playful, with clear feedback |
+| Logo | Design A (crop corners around a down arrow) in the green of design C (`#12B886`) |
+| Mascot | Open. Show 3 mascot ideas in the mockups |
+| Theme | User picks: System (default), Light, Dark |
+| Motion | Playful: bouncy buttons, a small celebration on the first save, a lively joke note |
+| Feedback | Every click and change shows a reaction right away (hover, press, a "Saved" tick) |
+| Tone | Quirky everywhere, errors too. Every error still says what went wrong and what to do |
+
+## Branding and license
+
+- License: all rights reserved, with an "as is" no-warranty clause (see `LICENSE`).
+- Footer, like the Kupa example:
+  - Line 1: `SnipKeep • version 2.0.0`
+  - Line 2: `© 2026 Asher Wertheim. All rights reserved.`
+- The footer shows in the settings window, on every installer screen and in the README.
+
+## Installer
+
+GitHub only, our own installer. Per-user, no admin. Three screens:
+
+1. **Welcome and privacy.** What SnipKeep does, and the promise: no data leaves your PC.
+2. **Options.**
+   - Start with Windows: on by default.
+   - Desktop icon: off by default.
+   - Tray icon: off by default.
+3. **Folder and finish.** Pick the folder (default `Pictures\Screenshots`), then Finish opens SnipKeep.
+
+Installer size budget: up to 5 MB. The SmartScreen warning stays for now (see Open questions).
+
+## What gets saved
+
+v2 saves only real screenshots. It checks which program put the image on the clipboard, not only the clipboard formats. A setting with three choices replaces the v1 "Screenshots only" checkbox:
+
+- Windows snip tool and Print Screen (default)
+- Windows snip tool only
+- Print Screen only
+
+If Windows uses the Print Screen key to open the snip tool (the default on Windows 11), Print Screen snips count as snip tool snips. The setting explains this. Content marked `ExcludeClipboardContentFromMonitorProcessing` is never saved.
+
+## Settings window
+
+Same settings as v1, plus:
+
+- Capture source (the three choices above).
+- Theme: System, Light, Dark.
+- Tray icon: on / off.
+- Saved pop-up: a small "Saved" toast after each snip. Off by default.
+- Sound on save: off by default.
+- Sub-folders by month (`2026-11\`): off by default.
+- File type: PNG (default) or JPG.
+- Hotkey to open the latest screenshot.
+- Dad jokes: on / off.
+- App PIN (see Privacy).
+
+## Tray icon
+
+Optional and off by default. Menu:
+
+- Pause / Resume, with 15 minutes, 1 hour and until restart.
+- Open folder
+- Change folder
+- Settings
+- Quit
+
+## Dad jokes
+
+- A bank of 1000+ original jokes written for SnipKeep. No copied joke lists.
+- The jokes are self-aware: they know an AI wrote them and that they are not great. Each joke can carry a small comment in a smaller font, for example "I'm an AI. I have no excuse for this one."
+- Shown on a small sticky note, tilted about 8 degrees, in the bottom right corner of the settings window.
+- Each time the window opens, a random joke the user has not seen yet.
+- Click the note for the next joke.
+- Seen jokes are stored in `%APPDATA%\SnipKeep\jokes-seen.json`. No joke repeats until all are seen. Then a funny "you have read them all" message shows, and the list starts over in a new random order.
+- A build-time check rejects jokes that are too similar to each other.
+- Jokes can be turned off in settings.
+
+## Privacy
+
+- No network calls. No telemetry. No update check: updates are manual from GitHub.
+- **Cloud guard:** warn when the chosen folder is synced by OneDrive or Google Drive, because screenshots would leave the PC.
+- **App PIN:** an optional PIN or Windows Hello prompt before SnipKeep opens the folder or settings. The files are not encrypted, so File Explorer can still open them. The setting says so.
+
+## Performance
+
+- Fast and responsive. No UI action waits on disk or the clipboard.
+- Window opens in under 0.3 s on a normal PC.
+- Idle CPU stays at 0% and idle memory under 50 MB (v1: 30 MB; WPF needs more).
+
+## Process
+
+1. Release v1.0.
+2. Mockups of every screen: installer (3 screens), settings window (light and dark), tray menu, joke note, toasts, mascot options.
+3. Asher approves the mockups.
+4. Build in small steps, each tested by Asher on Windows 10.
+
+## Open questions
+
+- Use ™ after SnipKeep in the footer, or not.
+- SmartScreen: live with the warning, pay for code signing (about $10 a month), or add a Microsoft Store version later.
+- The default hotkey for "open latest screenshot".
+- What a left-click on the tray icon does.
+- Does the app PIN also lock the settings window? How to reset a forgotten PIN?
+- Mascot: yes or no, and which one.
