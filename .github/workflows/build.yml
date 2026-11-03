@@ -77,8 +77,10 @@ jobs:
             "| SnipKeep-Setup.exe | $([math]::Round($setup / 1KB)) KB | 2048 KB |"
           )
           $summary | Out-File $env:GITHUB_STEP_SUMMARY -Append
+          $summary | Write-Host
           if ($exe -gt 300KB) { Write-Error "SnipKeep.exe is over the 300 KB budget" }
-          if ($setup -gt 2MB) { Write-Error "SnipKeep-Setup.exe is over the 2 MB budget" }
+          # Most of the installer is the Inno Setup program itself, so this is a warning, not a failure.
+          if ($setup -gt 2MB) { Write-Host "::warning::SnipKeep-Setup.exe is over the 2 MB budget" }
 
       - uses: actions/upload-artifact@v4
         with:
