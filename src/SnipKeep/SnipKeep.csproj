@@ -14,7 +14,7 @@
     <AssemblyTitle>SnipKeep</AssemblyTitle>
     <Description>SnipKeep</Description>
     <Company>Asher Wertheim</Company>
-    <Copyright>Copyright (c) 2026 Asher Wertheim</Copyright>
+    <Copyright>Copyright (c) 2026 Asher Wertheim. All rights reserved.</Copyright>
     <GenerateDocumentationFile>false</GenerateDocumentationFile>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <DebugType>none</DebugType>

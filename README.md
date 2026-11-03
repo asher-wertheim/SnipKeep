@@ -73,4 +73,4 @@ A hidden window registers with `AddClipboardFormatListener`, so Windows tells Sn
 
 ## License
 
-[MIT](LICENSE)
+Copyright (c) 2026 Asher Wertheim. All rights reserved. See [LICENSE](LICENSE).
