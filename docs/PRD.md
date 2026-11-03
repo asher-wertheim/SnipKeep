@@ -326,7 +326,7 @@ Optional and off by default. Menu:
 ## Process
 
 1. Release v1.0.
-2. Mockups of every screen: installer (3 screens), settings window (light and dark), tray menu, joke note, toasts, mascot options.
+2. Mockups of every screen: installer (3 screens), settings window (light and dark), tray menu, joke note, toasts, mascot options. Draft mockups are in `docs/mockups/`.
 3. Asher approves the mockups.
 4. Build in small steps, each tested by Asher on Windows 10.
 

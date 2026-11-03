@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>SnipKeep v2 mockups</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap">
+<style>
+:root{
+  --brand:#12B886; --brand-dark:#0C8F68; --brand-soft:#E6F8F1;
+  --bg:#F4F6F5; --win:#FFFFFF; --card:#F7F9F8; --line:#E3E8E6;
+  --text:#1E2A26; --muted:#66756F; --warn:#FFB020; --warn-soft:#FFF4DC;
+  --danger:#F0524A; --note:#FFE58A; --note-edge:#E9C95A;
+}
+.dark{
+  --bg:#0F1513; --win:#18201D; --card:#202A26; --line:#2C3833;
+  --text:#EAF2EE; --muted:#93A39C; --brand-soft:#123A2E; --warn-soft:#3A2F14;
+  --note:#F2D46B; --note-edge:#C9AC4A;
+}
+*{box-sizing:border-box}
+body{margin:0;background:#DDE3E0;font-family:Nunito,"Segoe UI",sans-serif;color:var(--text)}
+.shot{padding:36px;display:inline-block;background:linear-gradient(135deg,#CFE9DF,#E8EEF7)}
+.shot.darkbg{background:linear-gradient(135deg,#0B1F18,#1A2230)}
+.label{font:800 13px Nunito;letter-spacing:.08em;text-transform:uppercase;color:#4B5B55;margin:0 0 12px}
+.darkbg .label{color:#9FB3AA}
+
+/* window chrome */
+.win{background:var(--win);color:var(--text);border-radius:14px;box-shadow:0 20px 50px rgba(0,0,0,.18),0 0 0 1px rgba(0,0,0,.06);overflow:hidden;position:relative}
+.bar{height:40px;display:flex;align-items:center;padding:0 0 0 14px;font:700 13px Nunito;color:var(--muted)}
+.bar svg{margin-right:8px}
+.bar .sp{flex:1}
+.bar .wb{width:46px;height:40px;display:grid;place-items:center;font-size:14px;color:var(--muted)}
+
+/* buttons */
+.btn{font:800 15px Nunito;border:0;border-radius:14px;padding:12px 22px;cursor:pointer;display:inline-flex;align-items:center;gap:8px}
+.btn.primary{background:var(--brand);color:#fff;box-shadow:0 4px 0 var(--brand-dark)}
+.btn.ghost{background:transparent;color:var(--muted);box-shadow:inset 0 0 0 2px var(--line)}
+.btn.soft{background:var(--card);color:var(--text);box-shadow:0 3px 0 var(--line),inset 0 0 0 2px var(--line);padding:9px 16px;font-size:14px}
+.btn.small{padding:9px 16px;font-size:14px}
+
+/* toggle */
+.tg{width:48px;height:28px;border-radius:14px;background:var(--line);position:relative;flex:none}
+.tg::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;box-shadow:0 2px 3px rgba(0,0,0,.2)}
+.tg.on{background:var(--brand)} .tg.on::after{left:23px}
+
+/* footer */
+.foot{font:600 12px Nunito;color:var(--muted);line-height:1.6;text-align:center}
+
+/* installer */
+.inst{width:640px;height:560px;display:flex;flex-direction:column}
+.inst .body{flex:1;padding:8px 44px 0;display:flex;flex-direction:column}
+.steps{display:flex;gap:8px;justify-content:center;margin:4px 0 18px}
+.steps i{width:28px;height:8px;border-radius:4px;background:var(--line)}
+.steps i.on{background:var(--brand)}
+.inst h1{font:900 30px Nunito;margin:10px 0 6px;text-align:center}
+.inst p.sub{font:600 16px Nunito;color:var(--muted);text-align:center;margin:0 0 20px;line-height:1.45}
+.inst .actions{display:flex;justify-content:space-between;align-items:center;padding:18px 44px 10px}
+.inst .foot{padding:0 0 14px}
+.privacy{display:flex;gap:14px;align-items:flex-start;background:var(--brand-soft);border-radius:16px;padding:16px 18px}
+.privacy b{font:800 16px Nunito;display:block;margin-bottom:4px}
+.privacy span{font:600 14px Nunito;color:var(--muted);line-height:1.45}
+.opt{display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:16px;background:var(--card);margin-bottom:10px}
+.opt .ic{width:40px;height:40px;border-radius:12px;background:var(--brand-soft);display:grid;place-items:center;flex:none}
+.opt .tx{flex:1} .opt b{font:800 16px Nunito;display:block} .opt span{font:600 13px Nunito;color:var(--muted)}
+.field{display:flex;gap:10px;align-items:center}
+.input{flex:1;font:700 14px Nunito;background:var(--card);border-radius:12px;padding:12px 14px;box-shadow:inset 0 0 0 2px var(--line);color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.okline{display:flex;gap:8px;align-items:center;font:700 14px Nunito;color:var(--brand-dark);margin-top:12px}
+.dark .okline{color:var(--brand)}
+.warnline{display:flex;gap:10px;align-items:flex-start;font:700 14px Nunito;background:var(--warn-soft);border-radius:12px;padding:12px 14px;margin-top:12px;line-height:1.4}
+
+/* settings */
+.set{width:960px;display:flex;flex-direction:column}
+.set .content{flex:1;display:grid;grid-template-columns:1fr 1fr;gap:18px;padding:6px 28px 0}
+.hero{grid-column:1/3;display:flex;align-items:center;gap:18px;background:var(--brand-soft);border-radius:20px;padding:16px 20px}
+.hero .t{flex:1} .hero b{font:900 21px Nunito;display:block} .hero span{font:600 14px Nunito;color:var(--muted)}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--brand);margin-right:8px;box-shadow:0 0 0 4px rgba(18,184,134,.25)}
+.card{background:var(--card);border-radius:18px;padding:16px 18px}
+.card h3{font:900 15px Nunito;margin:0 0 10px;display:flex;align-items:center;gap:8px}
+.card .hint{font:600 12.5px Nunito;color:var(--muted);margin-top:8px}
+.row{display:flex;align-items:center;gap:12px;padding:7px 0}
+.row .tx{flex:1;font:700 14px Nunito} .row .tx small{display:block;font:600 12px Nunito;color:var(--muted)}
+.radio{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:12px;font:700 14px Nunito;margin-bottom:6px;box-shadow:inset 0 0 0 2px var(--line)}
+.radio i{width:18px;height:18px;border-radius:50%;box-shadow:inset 0 0 0 2px var(--muted);flex:none}
+.radio.on{box-shadow:inset 0 0 0 2px var(--brand);background:var(--brand-soft)} .radio.on i{box-shadow:inset 0 0 0 5px var(--brand)}
+.seg{display:inline-flex;background:var(--line);border-radius:10px;padding:3px}
+.seg span{font:800 12.5px Nunito;padding:5px 12px;border-radius:8px;color:var(--muted)}
+.seg span.on{background:var(--win);color:var(--text);box-shadow:0 1px 2px rgba(0,0,0,.15)}
+.key{font:800 12px Nunito;background:var(--win);border-radius:7px;padding:4px 8px;box-shadow:0 2px 0 var(--line),inset 0 0 0 1.5px var(--line)}
+.set .bottom{padding:22px 28px 22px}
+.set .note{position:absolute;right:46px;bottom:34px}
+.set .foot{text-align:left}
+.set .foot a{color:var(--brand-dark);text-decoration:none;font-weight:800;margin-right:12px}
+.dark .set .foot a,.dark .foot a{color:var(--brand)}
+.note{width:300px;background:var(--note);color:#3B3313;border-radius:6px 6px 22px 6px;padding:16px 18px 14px;transform:rotate(-8deg);box-shadow:0 10px 20px rgba(0,0,0,.18),inset 0 -3px 0 var(--note-edge);position:relative}
+.note::before{content:"";position:absolute;top:-10px;left:50%;width:70px;height:20px;margin-left:-35px;background:rgba(255,255,255,.55);transform:rotate(3deg);border-radius:3px}
+.note .j{font:800 15px Nunito;line-height:1.35}
+.note .c{font:italic 600 11.5px Nunito;opacity:.72;margin-top:8px}
+.note .n{font:900 11px Nunito;letter-spacing:.06em;text-transform:uppercase;opacity:.6;margin-top:8px}
+
+/* tray + toasts */
+.menu{width:290px;background:var(--win);border-radius:14px;box-shadow:0 16px 40px rgba(0,0,0,.25),0 0 0 1px rgba(0,0,0,.06);padding:8px;font:700 14px Nunito}
+.menu .mh{display:flex;align-items:center;gap:10px;padding:10px 12px 12px;border-bottom:2px solid var(--line);margin-bottom:6px}
+.menu .mh b{font:900 15px Nunito;display:block} .menu .mh span{font:600 12px Nunito;color:var(--muted)}
+.mi{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:10px}
+.mi.hot{background:var(--brand-soft)} .mi .k{margin-left:auto;color:var(--muted);font-size:12px}
+.sep{height:2px;background:var(--line);margin:6px 8px}
+.submenu{position:absolute;left:300px;top:70px;width:200px}
+.toast{width:380px;background:#202020;color:#fff;border-radius:10px;padding:14px 16px;display:flex;gap:14px;box-shadow:0 12px 30px rgba(0,0,0,.35);margin-bottom:14px}
+.toast .app{font:700 12px "Segoe UI",Nunito;color:#C9C9C9;display:flex;align-items:center;gap:6px;margin-bottom:6px}
+.toast b{font:800 15px Nunito;display:block;margin-bottom:2px} .toast span{font:600 13px Nunito;color:#C9C9C9}
+.toast .big{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;flex:none;font-size:22px}
+
+/* mascots */
+.masc{display:flex;gap:22px}
+.mc{width:250px;background:#fff;border-radius:20px;padding:20px;text-align:center;box-shadow:0 6px 18px rgba(0,0,0,.08)}
+.mc h4{font:900 18px Nunito;margin:10px 0 4px} .mc p{font:600 13px Nunito;color:#66756F;margin:0;line-height:1.45}
+.grid2{display:grid;grid-template-columns:auto auto;gap:28px;align-items:start}
+</style>
+</head>
+<body>
+
+<!-- ============ shared SVG pieces ============ -->
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <symbol id="logo" viewBox="0 0 128 128">
+      <rect x="4" y="4" width="120" height="120" rx="28" fill="#12B886"/>
+      <path d="M30 46V30h16M98 46V30H82M30 82v16h16M98 82v16H82" stroke="#fff" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M64 44v36M50 68l14 14 14-14" stroke="#fff" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <!-- Mascot A: Keepy, the app icon come alive -->
+    <symbol id="keepy" viewBox="0 0 160 170">
+      <ellipse cx="80" cy="162" rx="44" ry="6" fill="#000" opacity=".12"/>
+      <rect x="54" y="138" width="16" height="22" rx="8" fill="#0C8F68"/><rect x="90" y="138" width="16" height="22" rx="8" fill="#0C8F68"/>
+      <rect x="20" y="20" width="120" height="124" rx="32" fill="#12B886"/>
+      <path d="M38 52V38h14M122 52V38h-14M38 112v14h14M122 112v14h-14" stroke="#fff" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/>
+      <circle cx="62" cy="74" r="11" fill="#fff"/><circle cx="98" cy="74" r="11" fill="#fff"/>
+      <circle cx="64" cy="76" r="5.5" fill="#1E2A26"/><circle cx="100" cy="76" r="5.5" fill="#1E2A26"/>
+      <circle cx="66" cy="73" r="2" fill="#fff"/><circle cx="102" cy="73" r="2" fill="#fff"/>
+      <path d="M66 98q14 12 28 0" stroke="#1E2A26" stroke-width="5" fill="none" stroke-linecap="round"/>
+      <circle cx="48" cy="96" r="6" fill="#FF8FA3" opacity=".55"/><circle cx="112" cy="96" r="6" fill="#FF8FA3" opacity=".55"/>
+      <path d="M140 70q16-14 10-34" stroke="#12B886" stroke-width="12" fill="none" stroke-linecap="round"/>
+    </symbol>
+    <!-- Mascot B: Snippy, scissors with googly eyes -->
+    <symbol id="snippy" viewBox="0 0 160 170">
+      <ellipse cx="80" cy="162" rx="40" ry="6" fill="#000" opacity=".12"/>
+      <path d="M70 92L40 150M90 92l30 58" stroke="#B9C4C0" stroke-width="14" stroke-linecap="round"/>
+      <path d="M70 92L40 150M90 92l30 58" stroke="#E3E8E6" stroke-width="6" stroke-linecap="round"/>
+      <circle cx="80" cy="94" r="7" fill="#66756F"/>
+      <circle cx="52" cy="52" r="30" fill="#12B886"/><circle cx="108" cy="52" r="30" fill="#12B886"/>
+      <circle cx="52" cy="52" r="17" fill="#fff"/><circle cx="108" cy="52" r="17" fill="#fff"/>
+      <circle cx="57" cy="57" r="8" fill="#1E2A26"/><circle cx="103" cy="56" r="8" fill="#1E2A26"/>
+      <circle cx="60" cy="54" r="2.5" fill="#fff"/><circle cx="106" cy="53" r="2.5" fill="#fff"/>
+      <path d="M70 84q10 7 20 0" stroke="#1E2A26" stroke-width="4" fill="none" stroke-linecap="round"/>
+    </symbol>
+    <!-- Mascot C: Pip, an instant photo with a face -->
+    <symbol id="pip" viewBox="0 0 160 170">
+      <ellipse cx="80" cy="162" rx="44" ry="6" fill="#000" opacity=".12"/>
+      <g transform="rotate(-6 80 85)">
+        <rect x="28" y="18" width="104" height="128" rx="12" fill="#fff" stroke="#E3E8E6" stroke-width="3"/>
+        <rect x="40" y="30" width="80" height="80" rx="8" fill="#12B886"/>
+        <path d="M40 92l22-20 16 14 14-10 28 24v8a8 8 0 0 1-8 8H48a8 8 0 0 1-8-8z" fill="#0C8F68"/>
+        <circle cx="102" cy="48" r="8" fill="#FFE58A"/>
+        <circle cx="64" cy="126" r="5" fill="#1E2A26"/><circle cx="96" cy="126" r="5" fill="#1E2A26"/>
+        <path d="M72 134q8 6 16 0" stroke="#1E2A26" stroke-width="4" fill="none" stroke-linecap="round"/>
+      </g>
+      <path d="M30 100q-18 6-20 24M130 100q18-4 22-22" stroke="#12B886" stroke-width="8" fill="none" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="shield" viewBox="0 0 24 24"><path d="M12 2l8 3v6c0 5-3.5 9-8 11-4.5-2-8-6-8-11V5z" fill="#12B886"/><path d="M8 12l3 3 5-6" stroke="#fff" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="folder" viewBox="0 0 24 24"><path d="M3 6a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" fill="#12B886"/></symbol>
+  </defs>
+</svg>
+
+<!-- ============ 1. Installer: welcome ============ -->
+<section class="shot" id="installer-1">
+  <p class="label">Installer 1 of 3: Welcome and privacy</p>
+  <div class="win inst">
+    <div class="bar"><svg width="16" height="16"><use href="#logo"/></svg>SnipKeep Setup<span class="sp"></span><span class="wb">&#9472;</span><span class="wb">&#10005;</span></div>
+    <div class="body">
+      <div class="steps"><i class="on"></i><i></i><i></i></div>
+      <div style="text-align:center"><svg width="118" height="125"><use href="#keepy"/></svg></div>
+      <h1>Hi! I'm SnipKeep.</h1>
+      <p class="sub">I save every Win+Shift+S screenshot to a folder for you.<br>No clicks, no "Save as", no lost snips. Ever.</p>
+      <div class="privacy">
+        <svg width="34" height="34" style="flex:none"><use href="#shield"/></svg>
+        <div><b>Your screenshots never leave this PC.</b>
+        <span>No internet. No accounts. No tracking. I don't even know your name, and I like it that way.</span></div>
+      </div>
+    </div>
+    <div class="actions"><button class="btn ghost">Maybe later</button><button class="btn primary">Let's go &#8594;</button></div>
+    <div class="foot">SnipKeep &#8226; version 2.0.0<br>&#169; 2026 Asher Wertheim. All rights reserved.</div>
+  </div>
+</section>
+
+<!-- ============ 2. Installer: options ============ -->
+<section class="shot" id="installer-2">
+  <p class="label">Installer 2 of 3: A few choices</p>
+  <div class="win inst">
+    <div class="bar"><svg width="16" height="16"><use href="#logo"/></svg>SnipKeep Setup<span class="sp"></span><span class="wb">&#9472;</span><span class="wb">&#10005;</span></div>
+    <div class="body">
+      <div class="steps"><i class="on"></i><i class="on"></i><i></i></div>
+      <h1>A few quick choices</h1>
+      <p class="sub">You can change all of these later. No pressure.</p>
+      <div class="opt"><div class="ic">&#9889;</div><div class="tx"><b>Start with Windows</b><span>So I'm ready the moment you are.</span></div><div class="tg on"></div></div>
+      <div class="opt"><div class="ic">&#128421;</div><div class="tx"><b>Desktop icon</b><span>For people who like a busy desktop. No judgment.</span></div><div class="tg"></div></div>
+      <div class="opt"><div class="ic">&#128205;</div><div class="tx"><b>Tray icon</b><span>A tiny icon by the clock for pause and quick actions.</span></div><div class="tg"></div></div>
+    </div>
+    <div class="actions"><button class="btn ghost">&#8592; Back</button><button class="btn primary">Next &#8594;</button></div>
+    <div class="foot">SnipKeep &#8226; version 2.0.0<br>&#169; 2026 Asher Wertheim. All rights reserved.</div>
+  </div>
+</section>
+
+<!-- ============ 3. Installer: folder ============ -->
+<section class="shot" id="installer-3">
+  <p class="label">Installer 3 of 3: Pick a home for your snips</p>
+  <div class="win inst">
+    <div class="bar"><svg width="16" height="16"><use href="#logo"/></svg>SnipKeep Setup<span class="sp"></span><span class="wb">&#9472;</span><span class="wb">&#10005;</span></div>
+    <div class="body">
+      <div class="steps"><i class="on"></i><i class="on"></i><i class="on"></i></div>
+      <h1>Where should your snips live?</h1>
+      <p class="sub">Pick a cozy folder. I'll put every screenshot there.</p>
+      <div class="field"><div class="input">&#128193;&nbsp; C:\Users\You\Pictures\Screenshots</div><button class="btn soft">Change...</button></div>
+      <div class="okline"><svg width="18" height="18"><use href="#shield"/></svg>Not synced to the cloud. Your snips stay home.</div>
+      <div class="warnline" style="margin-top:22px"><span>&#9888;&#65039;</span><span>If you pick a OneDrive or Google Drive folder, I'll let you know, because your snips would leave this PC.</span></div>
+    </div>
+    <div class="actions"><button class="btn ghost">&#8592; Back</button><button class="btn primary">Install and start &#127881;</button></div>
+    <div class="foot">SnipKeep &#8226; version 2.0.0<br>&#169; 2026 Asher Wertheim. All rights reserved.</div>
+  </div>
+</section>
+
+<!-- ============ 4/5. Settings window ============ -->
+<template id="settings-tpl">
+  <div class="win set">
+    <div class="bar"><svg width="16" height="16"><use href="#logo"/></svg>SnipKeep<span class="sp"></span><span class="wb">&#9472;</span><span class="wb">&#10005;</span></div>
+    <div class="content">
+      <div class="hero">
+        <svg width="62" height="66"><use href="#keepy"/></svg>
+        <div class="t"><b><span class="dot"></span>Saving your snips</b><span>Into Pictures\Screenshots. Last one saved 2 minutes ago.</span></div>
+        <button class="btn primary small">&#10074;&#10074; Pause</button>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div class="card"><h3><svg width="18" height="18"><use href="#folder"/></svg>Where</h3>
+          <div class="field"><div class="input">C:\Users\You\Pictures\Screenshots</div></div>
+          <div style="display:flex;gap:8px;margin-top:10px"><button class="btn soft">Change...</button><button class="btn soft">Open folder</button></div>
+          <div class="okline" style="font-size:13px;margin-top:10px"><svg width="16" height="16"><use href="#shield"/></svg>Not synced to the cloud</div>
+        </div>
+        <div class="card"><h3>&#127991;&#65039; Name and type</h3>
+          <div class="field"><div class="input">Screenshot {yyyy-MM-dd HH.mm.ss}</div><span class="seg"><span class="on">PNG</span><span>JPG</span></span></div>
+          <div class="hint">Example: Screenshot 2026-11-04 09.41.07.png</div>
+          <div class="row" style="padding-bottom:0"><div class="tx">Sub-folder for each month<small>Like 2026-11\. Tidy people love this.</small></div><div class="tg"></div></div>
+        </div>
+        <div class="card"><h3>&#127912; Look and feel</h3>
+          <div class="row"><div class="tx">Theme</div><span class="seg"><span class="on">System</span><span>Light</span><span>Dark</span></span></div>
+          <div class="row"><div class="tx">Dad jokes<small>Strongly recommended by me, the joke writer</small></div><div class="tg on"></div></div>
+          <div class="row"><div class="tx">Tray icon<small>Quick actions by the clock</small></div><div class="tg"></div></div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div class="card"><h3>&#128248; What to save</h3>
+          <div class="radio on"><i></i>Snip tool and Print Screen</div>
+          <div class="radio"><i></i>Snip tool only (Win+Shift+S)</div>
+          <div class="radio"><i></i>Print Screen only</div>
+        </div>
+        <div class="card"><h3>&#10024; Extras</h3>
+          <div class="row"><div class="tx">"Saved!" pop-up</div><div class="tg"></div></div>
+          <div class="row"><div class="tx">Happy little sound</div><div class="tg"></div></div>
+          <div class="row"><div class="tx">Open latest snip</div><span class="key">Ctrl</span><span class="key">Alt</span><span class="key">S</span></div>
+          <div class="row"><div class="tx">App PIN<small>Ask for a PIN before opening your snips</small></div><div class="tg"></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="bottom">
+      <div class="foot"><div style="margin-bottom:6px"><a>Quit SnipKeep</a><a>GitHub</a></div>SnipKeep &#8226; version 2.0.0<br>&#169; 2026 Asher Wertheim. All rights reserved.</div>
+      <div class="note">
+        <div class="j">Why did the screenshot go to therapy? It had too many unresolved issues.</div>
+        <div class="c">I'm an AI. I had every joke on the internet to learn from, and I still wrote this.</div>
+        <div class="n">Click for another &#8226; 37 of 1,024 seen</div>
+      </div>
+    </div>
+  </div>
+</template>
+<section class="shot" id="settings-light"><p class="label">Settings window: light</p><div class="slot"></div></section>
+<section class="shot darkbg dark" id="settings-dark"><p class="label">Settings window: dark</p><div class="slot"></div></section>
+
+<!-- ============ 6. Tray menu ============ -->
+<section class="shot" id="tray">
+  <p class="label">Tray menu (optional, off by default)</p>
+  <div style="position:relative;width:540px;height:470px">
+    <div class="menu" style="position:absolute;left:0;top:0">
+      <div class="mh"><svg width="34" height="34"><use href="#logo"/></svg><div><b>SnipKeep</b><span><span class="dot" style="width:8px;height:8px"></span>Saving your snips</span></div></div>
+      <div class="mi hot">&#10074;&#10074;&nbsp; Pause<span class="k">&#9656;</span></div>
+      <div class="mi">&#128193;&nbsp; Open folder</div>
+      <div class="mi">&#128260;&nbsp; Change folder...</div>
+      <div class="sep"></div>
+      <div class="mi">&#9881;&#65039;&nbsp; Settings</div>
+      <div class="mi" style="color:var(--danger)">&#9211;&nbsp; Quit SnipKeep</div>
+    </div>
+    <div class="menu submenu">
+      <div class="mi">For 15 minutes</div>
+      <div class="mi hot">For 1 hour</div>
+      <div class="mi">Until I restart</div>
+      <div class="mi">Until I say so</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 7. Toasts ============ -->
+<section class="shot darkbg" id="toasts">
+  <p class="label">Notifications (Windows toasts)</p>
+  <div class="toast"><div class="big" style="background:#12B886">&#127881;</div><div><div class="app"><svg width="14" height="14"><use href="#logo"/></svg>SnipKeep</div><b>Your first snip is safe!</b><span>Click to see where it lives.</span></div></div>
+  <div class="toast"><div class="big" style="background:#12B886">&#10003;</div><div><div class="app"><svg width="14" height="14"><use href="#logo"/></svg>SnipKeep</div><b>Saved!</b><span>Screenshot 2026-11-04 09.41.07.png</span></div></div>
+  <div class="toast"><div class="big" style="background:#F0524A">&#128123;</div><div><div class="app"><svg width="14" height="14"><use href="#logo"/></svg>SnipKeep</div><b>Your folder vanished. Spooky.</b><span>I couldn't save that snip. Click to pick a new folder.</span></div></div>
+  <div class="toast"><div class="big" style="background:#FFB020">&#9729;&#65039;</div><div><div class="app"><svg width="14" height="14"><use href="#logo"/></svg>SnipKeep</div><b>Heads up: this folder syncs to OneDrive</b><span>Your snips would leave this PC. Click to choose a local folder.</span></div></div>
+  <div class="toast" style="margin-bottom:0"><div class="big" style="background:#7B5CFF">&#127942;</div><div><div class="app"><svg width="14" height="14"><use href="#logo"/></svg>SnipKeep</div><b>You've read all 1,024 dad jokes.</b><span>I'm out. Shuffling the deck. Act surprised.</span></div></div>
+</section>
+
+<!-- ============ 8. Mascot options ============ -->
+<section class="shot" id="mascots">
+  <p class="label">Mascot options: pick one, or none</p>
+  <div class="masc">
+    <div class="mc"><svg width="150" height="160"><use href="#keepy"/></svg><h4>A. Keepy</h4><p>The app icon, come alive. Matches the logo, so the brand stays simple.</p></div>
+    <div class="mc"><svg width="150" height="160"><use href="#snippy"/></svg><h4>B. Snippy</h4><p>Scissors with googly eyes. Silly and very "snip". A bit of a troublemaker.</p></div>
+    <div class="mc"><svg width="150" height="160"><use href="#pip"/></svg><h4>C. Pip</h4><p>An instant photo with a face. Warm and cute, says "your pictures".</p></div>
+  </div>
+</section>
+
+<script>
+const tpl=document.getElementById('settings-tpl');
+document.querySelectorAll('.slot').forEach(s=>s.appendChild(tpl.content.cloneNode(true)));
+</script>
+</body>
+</html>
