@@ -1,6 +1,6 @@
 # SnipKeep: PRD and Spec
 
-Nov 3, 2026 · Asher Wertheim · Status: draft, open questions at the end
+Nov 3, 2026 · Asher Wertheim · Status: approved, ready to build
 
 ## Summary
 
@@ -92,6 +92,7 @@ The user sees SnipKeep twice: at setup and when they want to change something. T
 3. On finish, SnipKeep opens the welcome window: "Where should screenshots go?" with the folder pre-filled as `Pictures\Screenshots`.
 4. User clicks Change or keeps the default, then Done.
 5. The window closes. A one-time toast says "SnipKeep is on. Press Win+Shift+S to try it."
+6. On the first saved screenshot only, a toast says "First screenshot saved. Click to open the folder." This shows the user where files go. Later saves stay silent.
 
 **Daily use**
 
@@ -205,8 +206,8 @@ v1.0 ships as a GitHub Release with two files: `SnipKeep-Setup.exe` and `SnipKee
 | Windows 11 Snipping Tool already auto-saves | Less need on 11 | Position as Windows 10 first. On 11 it still adds folder choice and naming |
 | Claude cannot run Windows builds directly | Bugs found late | Build in GitHub Actions. Asher tests each build |
 
-**Open questions**
+**Decisions (Nov 3, 2026)**
 
-- Name: SnipKeep, or another? Check that the name is free on GitHub and the Microsoft Store.
-- Rename the repo from `pc-screenshot-saver` to `snipkeep`? GitHub redirects the old link.
-- Default folder: `Pictures\Screenshots`, or ask with no default?
+- Name: SnipKeep. The only exact match found is a small, inactive code-snippet repo. A paid macOS app called SnapKeep exists, so always say "for Windows" in the README and store text.
+- Repo renamed from `pc-screenshot-saver` to `snipkeep`.
+- Default folder: `Pictures\Screenshots`, plus a one-time toast on the first save. Desktop was rejected because OneDrive often syncs it and it fills up fast.

@@ -9,7 +9,7 @@ Full product spec: `docs/PRD.md`. Follow it. If a change goes against the PRD, s
 
 ## Current state (Nov 3, 2026)
 - The repo root still holds the v0 PowerShell version (`ScreenshotSaver.ps1`, `.vbs`, `Install.cmd`, `icon.ico`). It works on Windows 10 and is in daily use.
-- v1 (C# app + installer) is specced in `docs/PRD.md` and not started. Waiting on the open questions at the end of the PRD.
+- v1 (C# app + installer) is specced and approved in `docs/PRD.md`. Not started. Decisions are at the end of the PRD.
 
 ## Plan for v1
 1. Move the v0 files to `legacy/`.
