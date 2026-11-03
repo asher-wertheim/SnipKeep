@@ -14,7 +14,7 @@ namespace SnipKeep
         /// <summary>Passed by the uninstaller: ask the running copy to quit.</summary>
         public const string QuitArg = "--quit";
 
-        // The installer checks this name (AppMutex) to see if SnipKeep is running. Keep them in sync.
+        // Only one copy runs per user session. A second launch signals the first one and exits.
         public const string MutexName = "SnipKeep.Running";
         private const string ShowEventName = "SnipKeep.ShowWindow";
         private const string QuitEventName = "SnipKeep.Quit";
