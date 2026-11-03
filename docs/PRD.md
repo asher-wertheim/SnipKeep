@@ -59,7 +59,7 @@ v1 does one job well: catch the snip, save it, stay out of the way.
 | Duplicate guard | Skips an image identical to the last one saved |
 | Settings window | Folder, file name pattern, start with Windows, screenshots only, pause |
 | Open from Start menu | Launching SnipKeep while it runs opens the settings window |
-| Pause / resume | One button in settings. Optional auto-resume after 15 min, 1 h or until restart |
+| Pause / resume | One button in settings. Optional auto-resume after 15 min, 1 h or until restart, or stay paused until resumed |
 | Start with Windows | On by default. Shows as "SnipKeep" in Task Manager > Startup |
 | Error alerts only | Branded "SnipKeep" toast when a save fails, nothing on success |
 | Installer | Per-user, no admin, Start menu entry, uninstall from Settings > Apps |
@@ -137,7 +137,7 @@ SnipKeep is a C# WinForms app on .NET Framework 4.8, which ships inside Windows 
 | Settings | `%APPDATA%\SnipKeep\settings.json` | Easy to read, back up and delete |
 | Start with Windows | `HKCU\...\CurrentVersion\Run` value "SnipKeep" | Shows as SnipKeep in Task Manager. No admin |
 | Alerts | Short-lived notification icon, errors only | Toast header shows "SnipKeep" with our icon. Nothing stays in the tray |
-| Installer | Inno Setup, per-user, `%LOCALAPPDATA%\Programs\SnipKeep` | No admin prompt. Registers in Settings > Apps |
+| Installer | Inno Setup, per-user, `%LOCALAPPDATA%\Programs\SnipKeep` | No admin prompt. Registers in Settings > Apps. Asks a running copy to quit (`--quit`) before update and uninstall |
 | Build and release | GitHub Actions on `windows-latest`, triggered by a version tag | Every release is built the same way, from source |
 | License | MIT | Standard for portfolio open source |
 
@@ -147,7 +147,7 @@ The top row runs on every clipboard change. The bottom row runs only when the us
 
 **Screenshots-only rule**
 
-A clipboard update counts as a screenshot when it holds a bitmap and none of these formats: `HTML Format`, `FileDrop`, `Rich Text Format`, or Office drawing formats. Browsers and Office add those when you copy an image. Snip & Sketch does not. This rule must be checked on real Windows 10 and 11 machines before release.
+A clipboard update counts as a screenshot when it holds a bitmap and none of these formats: `HTML Format`, `FileDrop`, `Rich Text Format`, or Office drawing formats. Content marked `ExcludeClipboardContentFromMonitorProcessing` (used by password managers) is never saved, even with the setting off. Browsers and Office add those when you copy an image. Snip & Sketch does not. This rule must be checked on real Windows 10 and 11 machines before release.
 
 **Settings file**
 
@@ -158,6 +158,7 @@ A clipboard update counts as a screenshot when it holds a bitmap and none of the
 | `screenshotsOnly` | true |
 | `startWithWindows` | true |
 | `paused` / `pausedUntil` | false / empty |
+| `firstSaveShown` | false. Set after the one-time "First screenshot saved" toast |
 
 Name clashes in the same second get ` (2)`, ` (3)` and so on. Characters Windows does not allow are removed from the pattern.
 

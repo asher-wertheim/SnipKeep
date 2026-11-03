@@ -2,7 +2,7 @@
 
 SnipKeep saves every Win+Shift+S screenshot to a folder you pick, like macOS does. Set the folder once and forget about it.
 
-![SnipKeep demo](docs/demo.gif)
+<!-- Demo GIF goes here once recorded: ![SnipKeep demo](docs/demo.gif) -->
 
 - Saves each snip as a PNG in under a second. No extra clicks.
 - Skips images you copy from a browser, Office or File Explorer.
