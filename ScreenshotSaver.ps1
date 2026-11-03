@@ -26,6 +26,8 @@ if ($Install) {
     $s = (New-Object -ComObject WScript.Shell).CreateShortcut($lnk)
     $s.TargetPath = 'wscript.exe'
     $s.Arguments  = '"' + $vbs + '"'
+    $s.IconLocation = (Join-Path $PSScriptRoot 'icon.ico')
+    $s.Description  = 'Screenshot Saver'
     $s.Save()
     Start-Process wscript.exe -ArgumentList ('"' + $vbs + '"')
     exit
@@ -44,7 +46,8 @@ if (-not $script:folder) { exit }
 
 # --- Tray icon ---
 $tray = New-Object System.Windows.Forms.NotifyIcon
-$tray.Icon = [System.Drawing.SystemIcons]::Application
+$iconPath = Join-Path $PSScriptRoot 'icon.ico'
+$tray.Icon = if (Test-Path $iconPath) { New-Object System.Drawing.Icon($iconPath) } else { [System.Drawing.SystemIcons]::Application }
 $tray.Text = 'Screenshot Saver'
 $tray.Visible = $true
 
